@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>It works!</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>It works!</h1>
+    <div class="container">
+        <h1>It works!</h1>
+        <h2>Your IP address:</h2>
+        <p id="ip-address">Reloading...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("ip-address").textContent = data.ip;
+                })
+                .catch(error => {
+                    document.getElementById("ip-address").textContent = 
+                        "Failed to obtain IP address.";
+                });
+        });
+    </script>
 </body>
 </html>
